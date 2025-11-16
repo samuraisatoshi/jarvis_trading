@@ -1,0 +1,240 @@
+{
+  "fibonacci_strategy": {
+    "strategy_name": "Fibonacci Golden Zone",
+    "symbol": "BNB_USDT",
+    "timeframe": "4h",
+    "start_date": "2023-12-04",
+    "end_date": "2025-11-15",
+    "initial_balance": 5000.0,
+    "final_balance": 4768.988954054229,
+    "total_return_pct": -4.62022091891542,
+    "total_return_usd": -231.011045945771,
+    "annualized_return_pct": -2.3974282183586215,
+    "sharpe_ratio": -0.10505646992974399,
+    "max_drawdown_pct": -12.944745525972337,
+    "max_drawdown_usd": 760.8007870762458,
+    "win_rate_pct": 0.0,
+    "total_trades": 5,
+    "winning_trades": 0,
+    "losing_trades": 5,
+    "average_win_pct": 0,
+    "average_loss_pct": -5.928372106603233,
+    "profit_factor": 0.0,
+    "best_trade_pct": -4.8826571388275255,
+    "worst_trade_pct": -8.288442798674726,
+    "avg_trade_duration_hours": 274.4,
+    "longest_win_streak": 0,
+    "longest_loss_streak": 5,
+    "time_in_market_pct": 7.906432748538012
+  },
+  "buy_hold_baseline": {
+    "strategy_name": "Buy & Hold",
+    "initial_balance": 5000.0,
+    "final_balance": 20405.74662603396,
+    "total_return_pct": 308.1149325206792,
+    "total_return_usd": 15405.74662603396,
+    "annualized_return_pct": 105.74356843278365,
+    "max_drawdown_pct": -39.2294713160855,
+    "entry_price": 229.7,
+    "exit_price": 937.44,
+    "quantity": 21.767522855899,
+    "entry_date": "2023-12-04",
+    "exit_date": "2025-11-15"
+  },
+  "outperformance_pct": -312.7351534395946,
+  "quarterly_performance": [
+    {
+      "period": "2023Q4",
+      "start_date": "2023-12-04",
+      "end_date": "2023-12-31",
+      "start_value": 5000.0,
+      "end_value": 5000.0,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    },
+    {
+      "period": "2024Q1",
+      "start_date": "2024-01-01",
+      "end_date": "2024-03-31",
+      "start_value": 5000.0,
+      "end_value": 5000.0,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    },
+    {
+      "period": "2024Q2",
+      "start_date": "2024-04-01",
+      "end_date": "2024-06-30",
+      "start_value": 5000.0,
+      "end_value": 5000.0,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    },
+    {
+      "period": "2024Q3",
+      "start_date": "2024-07-01",
+      "end_date": "2024-09-30",
+      "start_value": 5000.0,
+      "end_value": 4607.83666668232,
+      "return_pct": -7.8432666663535935,
+      "num_trades": 2,
+      "winning_trades": 0
+    },
+    {
+      "period": "2024Q4",
+      "start_date": "2024-10-01",
+      "end_date": "2024-12-31",
+      "start_value": 4607.83666668232,
+      "end_value": 4749.282678787894,
+      "return_pct": 3.0696837222621403,
+      "num_trades": 1,
+      "winning_trades": 0
+    },
+    {
+      "period": "2025Q1",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "start_value": 4749.282678787894,
+      "end_value": 4749.282678787894,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    },
+    {
+      "period": "2025Q2",
+      "start_date": "2025-04-01",
+      "end_date": "2025-06-30",
+      "start_value": 4749.282678787894,
+      "end_value": 4768.988954054229,
+      "return_pct": 0.4149316138698335,
+      "num_trades": 2,
+      "winning_trades": 0
+    },
+    {
+      "period": "2025Q3",
+      "start_date": "2025-07-01",
+      "end_date": "2025-09-30",
+      "start_value": 4768.988954054229,
+      "end_value": 4768.988954054229,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    },
+    {
+      "period": "2025Q4",
+      "start_date": "2025-10-01",
+      "end_date": "2025-11-15",
+      "start_value": 4768.988954054229,
+      "end_value": 4768.988954054229,
+      "return_pct": 0.0,
+      "num_trades": 0,
+      "winning_trades": 0
+    }
+  ],
+  "trades": [
+    {
+      "entry_time": "2024-07-12 16:00:00",
+      "entry_price": 531.2,
+      "exit_time": "2024-07-15 08:00:00",
+      "exit_price": 559.731,
+      "quantity": 9.412650602409638,
+      "side": "SHORT",
+      "stop_loss": 559.731,
+      "take_profit_1": 372.297,
+      "take_profit_2": 238.79700000000008,
+      "confirmations": [
+        "RSI_BEARISH_DIVERGENCE",
+        "SHOOTING_STAR"
+      ],
+      "pnl": -268.5523343373489,
+      "pnl_pct": -5.371046686746978,
+      "duration_hours": 64.0,
+      "exit_reason": "stop_loss"
+    },
+    {
+      "entry_time": "2024-08-12 16:00:00",
+      "entry_price": 513.1,
+      "exit_time": "2024-08-19 20:00:00",
+      "exit_price": 555.628,
+      "quantity": 9.22129734099133,
+      "side": "SHORT",
+      "stop_loss": 555.628,
+      "take_profit_1": 277.63599999999997,
+      "take_profit_2": 79.63599999999997,
+      "confirmations": [
+        "RSI_BEARISH_DIVERGENCE",
+        "BEARISH_ENGULFING"
+      ],
+      "pnl": -392.1633333176794,
+      "pnl_pct": -8.288442798674726,
+      "duration_hours": 172.0,
+      "exit_reason": "stop_loss"
+    },
+    {
+      "entry_time": "2024-12-18 04:00:00",
+      "entry_price": 713.31,
+      "exit_time": "2024-12-19 16:00:00",
+      "exit_price": 674.49804,
+      "quantity": 6.459795413890624,
+      "side": "LONG",
+      "stop_loss": 674.49804,
+      "take_profit_1": 887.70948,
+      "take_profit_2": 1039.56948,
+      "confirmations": [
+        "VOLUME_SPIKE",
+        "HAMMER"
+      ],
+      "pnl": -250.71732121210633,
+      "pnl_pct": -5.441106952096565,
+      "duration_hours": 36.0,
+      "exit_reason": "stop_loss"
+    },
+    {
+      "entry_time": "2025-04-12 00:00:00",
+      "entry_price": 585.05,
+      "exit_time": "2025-04-22 20:00:00",
+      "exit_price": 618.15568,
+      "quantity": 8.11773810578223,
+      "side": "SHORT",
+      "stop_loss": 618.15568,
+      "take_profit_1": 442.82416,
+      "take_profit_2": 317.94416,
+      "confirmations": [
+        "RSI_BEARISH_DIVERGENCE",
+        "SHOOTING_STAR"
+      ],
+      "pnl": -268.7432400538327,
+      "pnl_pct": -5.658606956670371,
+      "duration_hours": 260.0,
+      "exit_reason": "stop_loss"
+    },
+    {
+      "entry_time": "2025-05-18 16:00:00",
+      "entry_price": 638.13,
+      "exit_time": "2025-06-22 16:00:00",
+      "exit_price": 606.9722999999999,
+      "quantity": 7.4142522055790625,
+      "side": "LONG",
+      "stop_loss": 606.9722999999999,
+      "take_profit_1": 760.6401000000001,
+      "take_profit_2": 870.0901000000001,
+      "confirmations": [
+        "RSI_BULLISH_DIVERGENCE",
+        "VOLUME_SPIKE"
+      ],
+      "pnl": -231.01104594577143,
+      "pnl_pct": -4.8826571388275255,
+      "duration_hours": 840.0,
+      "exit_reason": "stop_loss"
+    }
+  ],
+  "parameters": {
+    "symbol": "BNB_USDT",
+    "timeframe": "4h",
+    "start_date": "2023-11-01",
+    "initial_balance": 5000.0
+  }
+}

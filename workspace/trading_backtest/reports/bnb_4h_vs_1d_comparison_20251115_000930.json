@@ -1,0 +1,29 @@
+{
+  "4h": {
+    "symbol": "BNB_USDT",
+    "timeframe": "4h",
+    "initial_balance": 5000,
+    "final_balance": 7985.802554845876,
+    "total_return": 59.716051096917525,
+    "buy_hold_return": 59.71605109691753,
+    "alpha": -7.105427357601002e-15,
+    "num_trades": 1,
+    "win_rate": 0.0,
+    "sharpe_ratio": 0.4711576353957016,
+    "max_drawdown": 32.35090591167826
+  },
+  "1d": {
+    "symbol": "BNB_USDT",
+    "timeframe": "1d",
+    "initial_balance": 5000,
+    "final_balance": 6249.219195567746,
+    "total_return": 24.984383911354925,
+    "buy_hold_return": 21.61544356650193,
+    "alpha": 3.3689403448529944,
+    "num_trades": 1,
+    "win_rate": 0.0,
+    "sharpe_ratio": 1.1616519924099442,
+    "max_drawdown": 29.599969404925826
+  },
+  "comparison_date": "2025-11-15T00:09:30.593420"
+}

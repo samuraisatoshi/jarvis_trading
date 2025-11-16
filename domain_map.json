@@ -1,0 +1,417 @@
+{
+  "project": "jarvis_trading",
+  "version": "1.0.0",
+  "description": "Multi-journey reinforcement learning trading system with FinRL-inspired architecture",
+  "architecture": "Domain-Driven Design (DDD) with SOLID principles",
+  "language": "Python 3.11+",
+  "domains": {
+    "market": {
+      "name": "Market Domain",
+      "description": "Market data fetching, validation, and caching",
+      "responsibility": "Manage real-time cryptocurrency market data from Binance",
+      "bounded_context": "Market data operations",
+      "entities": [
+        "Candlestick",
+        "MarketData",
+        "TradingPair"
+      ],
+      "value_objects": [
+        "Timeframe",
+        "Price",
+        "Volume",
+        "Timestamp"
+      ],
+      "services": [
+        "DataFetcher",
+        "DataValidator",
+        "DataCache"
+      ],
+      "repositories": [
+        "CandlestickRepository",
+        "MarketDataRepository"
+      ],
+      "external_dependencies": [
+        "Binance API",
+        "SQLite Cache"
+      ],
+      "key_files": [
+        "src/domain/market/entities/candlestick.py",
+        "src/domain/market/services/data_fetcher.py",
+        "src/domain/market/repositories/candlestick_repository.py"
+      ]
+    },
+    "features": {
+      "name": "Features Domain",
+      "description": "Technical indicator calculation and feature engineering",
+      "responsibility": "Extract, engineer, and select relevant features for ML",
+      "bounded_context": "Feature engineering pipeline",
+      "entities": [
+        "Feature",
+        "FeatureMatrix",
+        "Indicator"
+      ],
+      "value_objects": [
+        "IndicatorType",
+        "FeatureImportance",
+        "NormalizedValue"
+      ],
+      "services": [
+        "IndicatorCalculator",
+        "FeatureNormalizer",
+        "FeatureSelector"
+      ],
+      "repositories": [
+        "FeatureRepository",
+        "IndicatorRepository"
+      ],
+      "external_dependencies": [
+        "ta (Technical Analysis library)",
+        "NumPy",
+        "Scikit-learn"
+      ],
+      "key_files": [
+        "src/domain/features/services/indicator_calculator.py",
+        "src/domain/features/services/feature_normalizer.py",
+        "src/domain/features/services/feature_selector.py"
+      ]
+    },
+    "trading": {
+      "name": "Trading Domain",
+      "description": "Multi-timeframe signal generation and trading logic",
+      "responsibility": "Generate trading signals and manage trading decisions",
+      "bounded_context": "Trading operations",
+      "entities": [
+        "Signal",
+        "Order",
+        "TradePosition",
+        "Portfolio"
+      ],
+      "value_objects": [
+        "SignalType",
+        "OrderType",
+        "PositionSide",
+        "TradeStatus"
+      ],
+      "services": [
+        "SignalGenerator",
+        "MTFCombiner",
+        "PositionManager"
+      ],
+      "repositories": [
+        "SignalRepository",
+        "OrderRepository",
+        "PortfolioRepository"
+      ],
+      "external_dependencies": [
+        "Binance Trading API",
+        "Pandas"
+      ],
+      "key_files": [
+        "src/domain/trading/services/signal_generator.py",
+        "src/domain/trading/services/mtf_combiner.py",
+        "src/domain/trading/services/position_manager.py"
+      ]
+    },
+    "reinforcement_learning": {
+      "name": "Reinforcement Learning Domain",
+      "description": "RL agent training, optimization, and backtesting",
+      "responsibility": "Train and optimize RL agents for trading",
+      "bounded_context": "RL training and inference",
+      "entities": [
+        "Agent",
+        "TrainingSession",
+        "Episode",
+        "Experience"
+      ],
+      "value_objects": [
+        "Reward",
+        "Action",
+        "State",
+        "Hyperparameters"
+      ],
+      "services": [
+        "AgentTrainer",
+        "EnvironmentFactory",
+        "HyperparameterOptimizer",
+        "Backtester"
+      ],
+      "repositories": [
+        "AgentRepository",
+        "ExperienceRepository"
+      ],
+      "external_dependencies": [
+        "Stable-Baselines3",
+        "Gymnasium",
+        "PyTorch",
+        "MLFlow",
+        "Optuna"
+      ],
+      "key_files": [
+        "src/domain/reinforcement_learning/services/agent_trainer.py",
+        "src/domain/reinforcement_learning/services/environment_factory.py",
+        "src/domain/reinforcement_learning/services/hyperparameter_optimizer.py"
+      ]
+    }
+  },
+  "application_layer": {
+    "name": "Application Layer",
+    "description": "Use cases and orchestration",
+    "responsibility": "Coordinate domain services to implement business use cases",
+    "use_cases": [
+      "Journey1_FetchMarketData",
+      "Journey2_EngineerFeatures",
+      "Journey3_CombineMTFSignals",
+      "Journey4_TrainRLAgent",
+      "ExecuteTradeDecision",
+      "BacktestStrategy"
+    ],
+    "orchestrators": [
+      "TradingPipeline",
+      "TrainingPipeline",
+      "OptimizationPipeline"
+    ],
+    "key_files": [
+      "src/application/use_cases/",
+      "src/application/orchestrators/"
+    ]
+  },
+  "infrastructure_layer": {
+    "name": "Infrastructure Layer",
+    "description": "External service integrations",
+    "responsibility": "Handle external dependencies (APIs, databases, MLOps)",
+    "components": [
+      "BinanceConnector",
+      "CCXTConnector",
+      "SQLiteDataStore",
+      "MLFlowTracker",
+      "WandBMonitor",
+      "FileStorage"
+    ],
+    "external_services": [
+      "Binance API",
+      "CCXT Exchange",
+      "SQLite Database",
+      "MLFlow Server",
+      "WandB Cloud",
+      "File System"
+    ],
+    "key_files": [
+      "src/infrastructure/exchange/",
+      "src/infrastructure/persistence/",
+      "src/infrastructure/mlops/",
+      "src/infrastructure/monitoring/"
+    ]
+  },
+  "shared_layer": {
+    "name": "Shared Layer",
+    "description": "Common utilities and cross-cutting concerns",
+    "responsibility": "Provide reusable utilities, types, and patterns",
+    "components": [
+      "Logger",
+      "Config",
+      "Constants",
+      "Exceptions",
+      "Types",
+      "Utils"
+    ],
+    "key_files": [
+      "src/shared/logging/",
+      "src/shared/config/",
+      "src/shared/exceptions.py",
+      "src/shared/types.py",
+      "src/shared/utils.py"
+    ]
+  },
+  "journeys": {
+    "journey_1": {
+      "name": "Data Pipeline",
+      "description": "Real-time market data capture with intelligent caching",
+      "script": "scripts/journey_1_data_pipeline.py",
+      "inputs": [
+        "Trading pair (BTCUSDT, ETHUSDT, etc)",
+        "Timeframes (1m, 5m, 1h, 4h, 1d)"
+      ],
+      "outputs": [
+        "Cached OHLCV data",
+        "Data quality metrics"
+      ],
+      "domains_used": [
+        "market"
+      ],
+      "key_operations": [
+        "Fetch from Binance API",
+        "Validate data quality",
+        "Cache in SQLite",
+        "Manage cache expiry"
+      ]
+    },
+    "journey_2": {
+      "name": "Feature Engineering",
+      "description": "Auto-select and engineer relevant technical indicators",
+      "script": "scripts/journey_2_feature_engineering.py",
+      "inputs": [
+        "Raw OHLCV data from Journey 1"
+      ],
+      "outputs": [
+        "Normalized feature matrix",
+        "Feature importance ranking",
+        "Selected features"
+      ],
+      "domains_used": [
+        "market",
+        "features"
+      ],
+      "key_operations": [
+        "Calculate 30+ indicators",
+        "Analyze correlations",
+        "Select important features",
+        "Normalize values"
+      ]
+    },
+    "journey_3": {
+      "name": "MTF Combination",
+      "description": "Adaptive multi-timeframe signal combination",
+      "script": "scripts/journey_3_mtf_combination.py",
+      "inputs": [
+        "Features from multiple timeframes (Journey 2)"
+      ],
+      "outputs": [
+        "Combined trading signals",
+        "Signal confidence scores",
+        "Market regime classification"
+      ],
+      "domains_used": [
+        "features",
+        "trading"
+      ],
+      "key_operations": [
+        "Analyze timeframe hierarchies",
+        "Combine signals adaptively",
+        "Classify market regimes",
+        "Generate entry/exit signals"
+      ]
+    },
+    "journey_4": {
+      "name": "RL Training",
+      "description": "Ensemble reinforcement learning with production MLOps",
+      "script": "scripts/journey_4_rl_training.py",
+      "inputs": [
+        "Combined signals from Journey 3",
+        "Historical performance data"
+      ],
+      "outputs": [
+        "Trained RL agents",
+        "Performance metrics",
+        "Optimized hyperparameters",
+        "Backtest results"
+      ],
+      "domains_used": [
+        "trading",
+        "reinforcement_learning"
+      ],
+      "key_operations": [
+        "Create trading environment",
+        "Train multiple agents (PPO, SAC)",
+        "Ensemble voting strategy",
+        "Hyperparameter optimization",
+        "Backtesting",
+        "MLFlow tracking"
+      ]
+    }
+  },
+  "testing_strategy": {
+    "unit_tests": {
+      "target": "Individual domain services",
+      "coverage_minimum": "80%",
+      "location": "tests/unit/domain/"
+    },
+    "integration_tests": {
+      "target": "Journey execution",
+      "coverage_minimum": "70%",
+      "location": "tests/integration/"
+    },
+    "performance_tests": {
+      "target": "Data pipeline throughput",
+      "benchmarks": {
+        "data_fetch": "< 5 seconds",
+        "feature_engineering": "< 2 seconds",
+        "signal_generation": "< 100ms"
+      }
+    }
+  },
+  "deployment": {
+    "environments": {
+      "development": {
+        "binance_testnet": true,
+        "small_dataset": true,
+        "logging_level": "DEBUG"
+      },
+      "staging": {
+        "binance_testnet": true,
+        "full_dataset": true,
+        "logging_level": "INFO"
+      },
+      "production": {
+        "binance_testnet": false,
+        "full_dataset": true,
+        "logging_level": "WARNING"
+      }
+    }
+  },
+  "dependencies": {
+    "core": [
+      "python-dotenv",
+      "pydantic",
+      "pandas",
+      "numpy",
+      "scikit-learn"
+    ],
+    "trading": [
+      "binance-connector",
+      "ccxt",
+      "yfinance",
+      "ta"
+    ],
+    "ml": [
+      "torch",
+      "gymnasium",
+      "stable-baselines3",
+      "sb3-contrib",
+      "optuna"
+    ],
+    "mlops": [
+      "mlflow",
+      "wandb"
+    ],
+    "dev": [
+      "pytest",
+      "black",
+      "flake8",
+      "mypy",
+      "isort"
+    ]
+  },
+  "file_limits": {
+    "python_files": 400,
+    "test_files": 500,
+    "script_files": 300
+  },
+  "naming_conventions": {
+    "entities": "Noun (Candlestick, Signal, Agent)",
+    "services": "Noun + 'Service' (DataFetcher, SignalGenerator)",
+    "repositories": "Noun + 'Repository' (CandlestickRepository)",
+    "value_objects": "Noun (Timeframe, Price)",
+    "methods_query": "get_*, find_* (get_candlesticks)",
+    "methods_command": "*, create_*, save_* (save, create_signal)",
+    "methods_boolean": "is_*, has_* (is_bullish)",
+    "constants": "ALL_CAPS (DEFAULT_TIMEFRAME)"
+  },
+  "code_quality": {
+    "type_hints": "MANDATORY",
+    "error_handling": "MANDATORY - no silent failures",
+    "logging": "MANDATORY",
+    "documentation": "MANDATORY (module, class, method)",
+    "solid_principles": "MANDATORY",
+    "ddd_structure": "MANDATORY"
+  }
+}

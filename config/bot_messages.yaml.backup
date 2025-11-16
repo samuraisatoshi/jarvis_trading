@@ -1,0 +1,60 @@
+# Telegram Bot Messages Configuration
+# Use yaml-manager to modify without loading entire bot code
+
+commands:
+  start:
+    text: |
+      🤖 *JARVIS Trading System*
+
+      Sistema de trading automatizado com IA.
+
+      Use /help para ver os comandos disponíveis.
+    parse_mode: Markdown
+
+  help:
+    text: |
+      📚 *Comandos Disponíveis:*
+
+      📊 *Monitoramento*
+      /status - Status do sistema
+      /portfolio ou /p - Ver portfolio
+      /watchlist ou /w - Ver watchlist
+      /signals ou /s - Sinais ativos
+      /candles - Gráfico com indicadores
+
+      💼 *Trading*
+      /buy - Executar compra
+      /sell - Executar venda
+      /orders - Ordens abertas
+      /history - Histórico
+
+      ⚙️ *Configuração*
+      /settings - Configurações
+      /update - Atualizar parâmetros
+    parse_mode: Markdown
+
+  status:
+    online: "✅ Sistema Online"
+    offline: "❌ Sistema Offline"
+    processing: "⏳ Processando..."
+
+  portfolio:
+    header: "💼 *Portfolio Atual*"
+    empty: "Portfolio vazio"
+    format: "{symbol}: {quantity} @ ${price:.2f}"
+    total: "*Total:* ${total:,.2f}"
+
+  errors:
+    invalid_command: "❌ Comando inválido: {command}"
+    missing_params: "❌ Parâmetros faltando"
+    trade_failed: "❌ Falha ao executar trade: {error}"
+    connection_error: "❌ Erro de conexão"
+
+feedback:
+  typing: "typing"
+  upload_photo: "upload_photo"
+  upload_document: "upload_document"
+  processing_times:
+    fast: 1  # segundos
+    medium: 3
+    slow: 5

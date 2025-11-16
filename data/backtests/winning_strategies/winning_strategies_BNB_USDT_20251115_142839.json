@@ -1,0 +1,43 @@
+{
+  "trend_following": {
+    "symbol": "BNB_USDT",
+    "strategy": "Trend Following",
+    "initial_balance": 5000.0,
+    "final_balance": 6118.037408029063,
+    "total_return_usd": 1118.037408029063,
+    "total_return_pct": 22.360748160581263,
+    "buy_hold_return_pct": 59.71605109691753,
+    "buy_hold_balance": 7985.802554845876,
+    "alpha": -37.35530293633627,
+    "total_trades": 77,
+    "winning_trades": 37,
+    "losing_trades": 40,
+    "win_rate_pct": 48.05194805194805,
+    "avg_win_pct": 2.750857701121053,
+    "avg_loss_pct": -1.9227482583819833,
+    "sharpe_ratio": 1.4784242908024545,
+    "max_drawdown_pct": -14.188069068026687,
+    "best_trade_pct": 9.253568757519606,
+    "worst_trade_pct": -13.614423845418502
+  },
+  "momentum_day_trade": {
+    "symbol": "BNB_USDT",
+    "strategy": "Momentum Day Trade",
+    "initial_balance": 5000.0,
+    "final_balance": 3842.9402064576943,
+    "total_return_usd": -1157.0597935423057,
+    "total_return_pct": -23.14119587084611,
+    "buy_hold_return_pct": 29.12609098307749,
+    "total_trades": 49,
+    "winning_trades": 16,
+    "losing_trades": 33,
+    "win_rate_pct": 32.6530612244898,
+    "avg_win_pct": 1.6027063921224431,
+    "avg_loss_pct": -1.548839961065539,
+    "sharpe_ratio": -4.622897987062298,
+    "max_drawdown_pct": -27.84650173710141,
+    "best_trade_pct": 3.9140848335007403,
+    "worst_trade_pct": -5.255936974017336,
+    "avg_duration_hours": 8.224489795918368
+  }
+}

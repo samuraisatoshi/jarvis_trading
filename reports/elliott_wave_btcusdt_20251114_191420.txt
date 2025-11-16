@@ -1,0 +1,108 @@
+
+================================================================================
+ELLIOTT WAVE ANALYSIS - BTC/USDT
+Generated: 2025-11-14 22:14:20 UTC
+================================================================================
+
+--------------------------------------------------------------------------------
+TIMEFRAME: 1D (MACRO STRUCTURE)
+--------------------------------------------------------------------------------
+
+Current Price: $94,979.13
+
+Wave Analysis:
+  Wave Type: CORRECTIVE
+  Current Wave: C
+  Confidence: 100.0%
+  Wave Start: $107,255.00
+  Projected Target: $104,080.34
+  Invalidation Level: $98,944.36
+
+Fibonacci Levels:
+  0.0%   (Low):    $98,944.36
+  23.6%:           $119,767.39
+  38.2%:           $115,788.12
+  50.0%:           $112,571.99
+  61.8% (Golden):  $109,355.87
+  78.6%:           $104,776.99
+  100% (High):     $126,199.63
+  161.8%:          $143,043.39
+  261.8%:          $170,298.66
+
+Technical Indicators:
+  RSI: 27.60
+  MACD: -3249.83
+  MACD Signal: -2548.61
+  MACD Histogram: -701.22
+  Volume Trend: INCREASING
+  Momentum: BEARISH
+
+--------------------------------------------------------------------------------
+TIMEFRAME: 4H (MICRO STRUCTURE)
+--------------------------------------------------------------------------------
+
+Current Price: $94,979.13
+
+Wave Analysis:
+  Wave Type: CORRECTIVE
+  Current Wave: C
+  Confidence: 100.0%
+  Sub-wave Context: Within corrective Wave C (1D)
+
+Fibonacci Levels (4H):
+  38.2%:           $104,352.65
+  50.0%:           $103,380.43
+  61.8% (Golden):  $102,408.21
+
+Technical Indicators:
+  RSI: 25.74
+  MACD Histogram: -667.96
+  Volume Trend: INCREASING
+  Momentum: BEARISH
+
+--------------------------------------------------------------------------------
+MULTI-TIMEFRAME ANALYSIS
+--------------------------------------------------------------------------------
+
+  CONFIRMATION: Both timeframes show CORRECTIVE structure
+  MOMENTUM ALIGNED: BEARISH on both timeframes
+
+================================================================================
+TRADING SIGNAL
+================================================================================
+
+Strategic Position (1D): HOLD
+  Confidence: 50.0%
+  Reasoning: Wait for clearer correction completion signal
+
+Tactical Position (4H): HOLD
+  Confidence: 50.0%
+  Reasoning: Wait for clearer correction completion signal
+
+--------------------------------------------------------------------------------
+RECOMMENDED ACTION
+--------------------------------------------------------------------------------
+
+  ACTION: HOLD
+  CONFIDENCE: 50.0%
+  ALIGNMENT: Both timeframes agree
+
+--------------------------------------------------------------------------------
+RISK MANAGEMENT (Based on 4H for precise entry)
+--------------------------------------------------------------------------------
+
+  Entry Price: $94,979.13
+  Stop Loss: $100,813.59 (6.14%)
+
+  Take Profit Levels:
+    TP1: $104,352.65 (9.87%)
+    TP2: $102,408.21 (7.82%)
+    TP3: $112,591.79 (18.54%)
+
+  Risk/Reward Ratio: 1:1.27
+
+================================================================================
+DISCLAIMER: This analysis is for educational purposes only.
+Always do your own research and never risk more than you can afford to lose.
+================================================================================
+

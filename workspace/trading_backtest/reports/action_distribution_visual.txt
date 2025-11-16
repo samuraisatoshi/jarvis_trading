@@ -1,0 +1,242 @@
+================================================================================
+BNB_USDT MODEL ACTION DISTRIBUTION (2025 Backtest)
+================================================================================
+
+EXPECTED BEHAVIOR vs ACTUAL BEHAVIOR
+
+Expected Action Distribution (Normal RL Model):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      SELL          HOLD          BUY
+                   ◄─────────────────┼─────────────────►
+Action Value:     -1.0            0.0            +1.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SELL signals: ████████ (20-30%)
+HOLD signals: ██████████████████ (40-50%)
+BUY signals:  ████████ (20-30%)
+
+
+ACTUAL 4H Model Distribution (BROKEN):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      SELL          HOLD          BUY
+                   (MISSING!)         │             │
+Action Value:      0.0 ◄─────────────┼─────────────► 2.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SELL signals: (NONE - 0%)
+HOLD signals: ██████████████████████████████ (54.8%)
+BUY signals:  ████████████████████ (45.2%)
+
+>>> ACTION RANGE: [0.0, 2.0] - NO NEGATIVE VALUES POSSIBLE!
+
+
+ACTUAL 1D Model Distribution (BROKEN):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      SELL          HOLD          BUY
+                   (MISSING!)         │             │
+Action Value:      0.0 ◄─────────────┼─────────────► 2.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SELL signals: (NONE - 0%)
+HOLD signals: ██████████████████████████████████████████████████ (97.5%)
+BUY signals:  █ (2.5%)
+
+>>> ACTION RANGE: [0.0, 2.0] - NO NEGATIVE VALUES POSSIBLE!
+
+
+================================================================================
+DETAILED STATISTICS
+================================================================================
+
+4H MODEL (1,707 predictions):
+┌────────────────┬─────────┬──────────┬─────────────────────────────────────┐
+│ Action Type    │ Count   │ Percent  │ Visual Distribution                 │
+├────────────────┼─────────┼──────────┼─────────────────────────────────────┤
+│ SELL (<-0.3)   │    0    │   0.0%   │                                     │
+│ HOLD (±0.3)    │  936    │  54.8%   │ ███████████████████████████         │
+│ BUY (>+0.3)    │  771    │  45.2%   │ ██████████████████████              │
+└────────────────┴─────────┴──────────┴─────────────────────────────────────┘
+
+Action Value Distribution:
+  Min:     0.0000
+  1%ile:   0.0000
+  25%ile:  0.0000
+  Median:  0.0000  ◄── Half the time it does nothing
+  75%ile:  2.0000  ◄── Other half it wants to BUY
+  99%ile:  2.0000
+  Max:     2.0000
+
+Only 2 possible values: 0.0 or 2.0 (BINARY BEHAVIOR!)
+
+
+1D MODEL (118 predictions):
+┌────────────────┬─────────┬──────────┬─────────────────────────────────────┐
+│ Action Type    │ Count   │ Percent  │ Visual Distribution                 │
+├────────────────┼─────────┼──────────┼─────────────────────────────────────┤
+│ SELL (<-0.3)   │    0    │   0.0%   │                                     │
+│ HOLD (±0.3)    │  115    │  97.5%   │ ████████████████████████████████████│
+│ BUY (>+0.3)    │    3    │   2.5%   │ █                                   │
+└────────────────┴─────────┴──────────┴─────────────────────────────────────┘
+
+Action Value Distribution:
+  Min:     0.0000
+  1%ile:   0.0000
+  25%ile:  0.0000
+  Median:  0.0000  ◄── Almost always does nothing
+  75%ile:  0.0000
+  99%ile:  2.0000  ◄── Rarely wants to BUY
+  Max:     2.0000
+
+Only 2 possible values: 0.0 or 2.0 (BINARY BEHAVIOR!)
+97.5% of time: Action = 0.0 (extreme passivity)
+
+
+================================================================================
+TRADING TIMELINE VISUALIZATION
+================================================================================
+
+4H Model Trading Activity (2025):
+Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov
+ │    │    │    │    │    │    │    │    │    │    │
+ ─────▲────────────────────────────────────────────╳
+      │                                            │
+      └─ BUY (Feb 3)                    AUTO-CLOSE (Nov 14)
+
+Single trade, held for 9+ months. Never actively sold.
+
+
+1D Model Trading Activity (2025):
+Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov
+ │    │    │    │    │    │    │    │    │    │    │
+ ─────────────────────────────────────▲────────────╳
+                                      │            │
+                                      └─ BUY       └─ AUTO-CLOSE
+                                      (Aug 2)      (Nov 14)
+
+Single trade, held for 3+ months. Never actively sold.
+
+
+EXPECTED Active Trading:
+Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov
+ │    │    │    │    │    │    │    │    │    │    │
+ ──▲──▼──▲────▼────▲──▼──▲──────▼────▲────▼──▲────▼─
+   │  │  │    │    │  │  │      │    │    │  │    │
+   └──┘  └────┘    └──┘  └──────┘    └────┘  └────┘
+   BUY   BUY       BUY   BUY         BUY      BUY
+   SELL  SELL      SELL  SELL        SELL     SELL
+
+Multiple round-trip trades responding to market conditions.
+
+
+================================================================================
+PROBLEM DIAGNOSIS
+================================================================================
+
+Root Issue: Action Space Misconfiguration
+
+PPO Model Expected Configuration:
+┌─────────────────────────────────────────────────────┐
+│ action_space = gym.spaces.Box(                      │
+│     low=-1.0,                                       │
+│     high=1.0,                                       │
+│     shape=(1,),                                     │
+│     dtype=np.float32                                │
+│ )                                                   │
+└─────────────────────────────────────────────────────┘
+
+Actual Configuration (Suspected):
+┌─────────────────────────────────────────────────────┐
+│ action_space = gym.spaces.Box(                      │
+│     low=0.0,      ◄── WRONG! Should be -1.0        │
+│     high=2.0,     ◄── WRONG! Should be +1.0        │
+│     shape=(1,),                                     │
+│     dtype=np.float32                                │
+│ )                                                   │
+└─────────────────────────────────────────────────────┘
+
+Result:
+  ✗ Model cannot learn SELL actions
+  ✗ Only outputs: 0.0 (do nothing) or 2.0 (buy)
+  ✗ Behaves like simple buy-and-hold
+  ✗ No risk management
+  ✗ No downside protection
+
+
+================================================================================
+IMPACT ON TRADING PERFORMANCE
+================================================================================
+
+Consequence of Missing SELL Signals:
+
+1. NO PROFIT TAKING
+   - Cannot lock in gains
+   - Rides full volatility
+   - Gives back unrealized profits
+
+2. NO RISK MANAGEMENT
+   - Cannot exit losing positions
+   - No stop-loss capability
+   - Maximum drawdown exposure
+
+3. NO ADAPTABILITY
+   - Cannot respond to market changes
+   - Stuck in position regardless of conditions
+   - No tactical repositioning
+
+4. IDENTICAL TO BUY & HOLD
+   - 4H: +59.72% vs B&H +59.72% (0% alpha)
+   - 1D: +24.98% vs B&H +21.62% (+3% alpha from luck)
+   - Provides NO advantage over passive strategy
+
+
+================================================================================
+REQUIRED FIXES
+================================================================================
+
+1. Fix Action Space
+   ✓ Change: Box(0, 2) → Box(-1, 1)
+   ✓ Verify: Model can output negative values
+   ✓ Test: Actions span full [-1, 1] range
+
+2. Retrain Models
+   ✓ Use corrected action space
+   ✓ Include bear market data
+   ✓ Verify SELL signals in training logs
+   ✓ Monitor action distribution during training
+
+3. Validate with Backtest
+   ✓ Expect: 10-30% BUY signals
+   ✓ Expect: 10-30% SELL signals
+   ✓ Expect: 40-80% HOLD signals
+   ✓ Expect: Multiple round-trip trades
+   ✓ Expect: Active position management
+
+4. Performance Targets
+   ✓ Beat buy & hold by 5-15%
+   ✓ Lower max drawdown vs buy & hold
+   ✓ Sharpe ratio > 1.5
+   ✓ Win rate 50-65%
+   ✓ 5-20 trades per year
+
+
+================================================================================
+CONCLUSION
+================================================================================
+
+Current Status: CRITICAL BUG IN MODEL
+
+Both 4H and 1D models are UNUSABLE for live trading due to inability to
+produce SELL signals. Models require complete retraining with corrected
+action space configuration.
+
+DO NOT DEPLOY until:
+  1. Action space fixed
+  2. Models retrained
+  3. Backtest shows active trading
+  4. SELL signals confirmed working
+
+Risk Level: HIGH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Report Generated: 2025-11-15 00:20:00
+Analysis Tool: JARVIS Trading System

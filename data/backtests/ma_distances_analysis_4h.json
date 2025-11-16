@@ -1,0 +1,222 @@
+{
+  "BNBUSDT": {
+    "MA50": {
+      "bottoms_count": 26,
+      "tops_count": 28,
+      "bottom_sma_mean": -2.4792018824765103,
+      "top_sma_mean": 4.159192314821253,
+      "optimal_bottom_range": [
+        -4.063584538032968,
+        0.20583731288230855
+      ],
+      "optimal_top_range": [
+        0.8682647755911092,
+        6.294214900968025
+      ]
+    },
+    "MA100": {
+      "bottoms_count": 24,
+      "tops_count": 26,
+      "bottom_sma_mean": -0.8814496019719021,
+      "top_sma_mean": 5.740495275790672,
+      "optimal_bottom_range": [
+        -3.2371007543619483,
+        2.8647299833726176
+      ],
+      "optimal_top_range": [
+        0.2958276859169482,
+        10.34783708183111
+      ]
+    },
+    "MA200": {
+      "bottoms_count": 20,
+      "tops_count": 23,
+      "bottom_sma_mean": 3.185841220516062,
+      "top_sma_mean": 9.691582218332012,
+      "optimal_bottom_range": [
+        2.2850932395760974,
+        6.446574427810817
+      ],
+      "optimal_top_range": [
+        3.6797180361154034,
+        14.514305356494482
+      ]
+    }
+  },
+  "BTCUSDT": {
+    "MA50": {
+      "bottoms_count": 28,
+      "tops_count": 27,
+      "bottom_sma_mean": -2.0978808458141334,
+      "top_sma_mean": 1.9527926659795074,
+      "optimal_bottom_range": [
+        -3.536836326387217,
+        -0.2413895345159868
+      ],
+      "optimal_top_range": [
+        0.47703942785963727,
+        3.7122328048502844
+      ]
+    },
+    "MA100": {
+      "bottoms_count": 26,
+      "tops_count": 25,
+      "bottom_sma_mean": -1.7914787602272608,
+      "top_sma_mean": 2.4807663970758855,
+      "optimal_bottom_range": [
+        -4.650149625477379,
+        1.5307907498150843
+      ],
+      "optimal_top_range": [
+        -0.78166115418524,
+        4.4059733481162
+      ]
+    },
+    "MA200": {
+      "bottoms_count": 22,
+      "tops_count": 20,
+      "bottom_sma_mean": -1.5327437692588644,
+      "top_sma_mean": 2.8036031156681,
+      "optimal_bottom_range": [
+        -5.847535747268001,
+        2.1281289907931247
+      ],
+      "optimal_top_range": [
+        -1.3853359855693381,
+        5.9011364447350045
+      ]
+    }
+  },
+  "ETHUSDT": {
+    "MA50": {
+      "bottoms_count": 24,
+      "tops_count": 22,
+      "bottom_sma_mean": -4.344630575648908,
+      "top_sma_mean": 3.8246737448594588,
+      "optimal_bottom_range": [
+        -7.2840631376487925,
+        -0.3307464808627876
+      ],
+      "optimal_top_range": [
+        0.49312508575036273,
+        5.9699055049445375
+      ]
+    },
+    "MA100": {
+      "bottoms_count": 22,
+      "tops_count": 20,
+      "bottom_sma_mean": -3.4853994413089926,
+      "top_sma_mean": 5.381382053048702,
+      "optimal_bottom_range": [
+        -9.786917253765747,
+        -0.663458496328706
+      ],
+      "optimal_top_range": [
+        -0.7693036090848069,
+        8.540933348171382
+      ]
+    },
+    "MA200": {
+      "bottoms_count": 18,
+      "tops_count": 17,
+      "bottom_sma_mean": -0.49957539898311487,
+      "top_sma_mean": 9.195681337614257,
+      "optimal_bottom_range": [
+        -10.979403600556633,
+        6.423131630023505
+      ],
+      "optimal_top_range": [
+        -0.04505888006904345,
+        17.82195456159206
+      ]
+    }
+  },
+  "SOLUSDT": {
+    "MA50": {
+      "bottoms_count": 25,
+      "tops_count": 25,
+      "bottom_sma_mean": -4.600102960639501,
+      "top_sma_mean": 4.665894215770573,
+      "optimal_bottom_range": [
+        -8.017320827676832,
+        0.009197223853377613
+      ],
+      "optimal_top_range": [
+        1.3359510992284338,
+        6.63788134599003
+      ]
+    },
+    "MA100": {
+      "bottoms_count": 24,
+      "tops_count": 23,
+      "bottom_sma_mean": -4.43215268763647,
+      "top_sma_mean": 6.369896004210924,
+      "optimal_bottom_range": [
+        -12.24065336623583,
+        1.3686932149462931
+      ],
+      "optimal_top_range": [
+        1.4323646782400048,
+        10.001376746614953
+      ]
+    },
+    "MA200": {
+      "bottoms_count": 20,
+      "tops_count": 19,
+      "bottom_sma_mean": -3.415489507340129,
+      "top_sma_mean": 8.456160851200295,
+      "optimal_bottom_range": [
+        -12.378608790557822,
+        4.552177162949456
+      ],
+      "optimal_top_range": [
+        -0.21445127451600937,
+        16.4795749294005
+      ]
+    }
+  },
+  "ADAUSDT": {
+    "MA50": {
+      "bottoms_count": 23,
+      "tops_count": 25,
+      "bottom_sma_mean": -6.437617534773907,
+      "top_sma_mean": 5.775894621633255,
+      "optimal_bottom_range": [
+        -9.74848071825208,
+        -2.7174536800407005
+      ],
+      "optimal_top_range": [
+        -0.42116715323784876,
+        9.83903378648678
+      ]
+    },
+    "MA100": {
+      "bottoms_count": 22,
+      "tops_count": 24,
+      "bottom_sma_mean": -7.2971143690465565,
+      "top_sma_mean": 6.593455437548559,
+      "optimal_bottom_range": [
+        -11.704307516149003,
+        -0.1841830173491144
+      ],
+      "optimal_top_range": [
+        -3.531119620633889,
+        14.320910312198441
+      ]
+    },
+    "MA200": {
+      "bottoms_count": 18,
+      "tops_count": 21,
+      "bottom_sma_mean": -6.221907507489017,
+      "top_sma_mean": 8.561159987910322,
+      "optimal_bottom_range": [
+        -16.519210473817385,
+        -0.6657905933359687
+      ],
+      "optimal_top_range": [
+        -2.188369215188554,
+        20.86735010156374
+      ]
+    }
+  }
+}

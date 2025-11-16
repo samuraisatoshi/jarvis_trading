@@ -161,7 +161,7 @@ formatting:
   disable_web_page_preview: true
   disable_notification: false
 rate_limiting:
-  max_messages_per_minute: 60
+  max_messages_per_minute: 30
   retry_attempts: 3
   retry_delay_seconds: 2
 notifications:
@@ -175,7 +175,7 @@ notifications:
   weekly_reports: true
   errors: true
   warnings: true
-  health_checks: true
+  health_checks: false
 security:
   require_authorization: true
   whitelist_enabled: true

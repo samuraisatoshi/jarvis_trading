@@ -1,0 +1,104 @@
+{
+  "strategy": "DCA Smart",
+  "period": "2024-05-18 to 2025-11-15",
+  "days": 547,
+  "final_portfolio": 10673.340804741643,
+  "bnb_balance": 10.33330345223309,
+  "bnb_value": 9705.141935371841,
+  "usdt_balance": 968.1988693698022,
+  "usdt_reserved": 5193.198869369807,
+  "initial_capital": 5000.0,
+  "total_invested": 14621.71065287475,
+  "avg_cost": 1415.0083485368764,
+  "final_price": 939.21,
+  "total_return_usd": -3948.3698481331066,
+  "total_return_pct": -27.003474093209633,
+  "buy_hold_return_pct": 61.849043598138906,
+  "buy_hold_dca_return_pct": 87.41312671879835,
+  "dca_fixed_return_pct": 8.099390041448483,
+  "total_trades": 78,
+  "buy_trades": 56,
+  "sell_trades": 22,
+  "dip_buys": 12,
+  "ath_sells": 22,
+  "total_profit_taken": 10589.909522244556,
+  "top_dip_buys": [
+    {
+      "date": "2024-08-05",
+      "price": 464.2,
+      "amount": 600.0,
+      "rsi": 15.332581736189411,
+      "multiplier": 3.0,
+      "reason": "Weekly DCA #12: RSI<30 (Extreme Oversold: 3x)"
+    },
+    {
+      "date": "2025-02-03",
+      "price": 617.21,
+      "amount": 600.0,
+      "rsi": 29.649713288456738,
+      "multiplier": 3.0,
+      "reason": "Weekly DCA #38: RSI<30 (Extreme Oversold: 3x)"
+    },
+    {
+      "date": "2025-11-10",
+      "price": 991.98,
+      "amount": 600.0,
+      "rsi": 27.34283422789808,
+      "multiplier": 3.0,
+      "reason": "Weekly DCA #78: RSI<30 (Extreme Oversold: 3x)"
+    },
+    {
+      "date": "2024-06-24",
+      "price": 568.1,
+      "amount": 400.0,
+      "rsi": 30.235783633841862,
+      "multiplier": 2.0,
+      "reason": "Weekly DCA #6: RSI<40 (Oversold: 2x)"
+    },
+    {
+      "date": "2024-07-01",
+      "price": 576.9,
+      "amount": 400.0,
+      "rsi": 39.12698412698414,
+      "multiplier": 2.0,
+      "reason": "Weekly DCA #7: RSI<40 (Oversold: 2x)"
+    }
+  ],
+  "top_ath_sells": [
+    {
+      "date": "2024-05-18",
+      "price": 580.3,
+      "amount": 0.0,
+      "quantity": 0.0,
+      "reason": "ATH Profit Taking: Profit inf% > 100% (Sell 25%)"
+    },
+    {
+      "date": "2024-05-19",
+      "price": 574.5,
+      "amount": 0.0,
+      "quantity": 0.0,
+      "reason": "ATH Profit Taking: Profit inf% > 100% (Sell 25%)"
+    },
+    {
+      "date": "2024-05-20",
+      "price": 599.6,
+      "amount": 25.0,
+      "quantity": 0.04169446297531688,
+      "reason": "ATH Profit Taking: Profit 4900.0% > 100% (Sell 25%)"
+    },
+    {
+      "date": "2024-05-21",
+      "price": 618.5,
+      "amount": 19.34101901267512,
+      "quantity": 0.03127084723148766,
+      "reason": "ATH Profit Taking: Profit 4902.4% > 100% (Sell 25%)"
+    },
+    {
+      "date": "2024-05-22",
+      "price": 614.8,
+      "amount": 14.41898765843896,
+      "quantity": 0.023453135423615747,
+      "reason": "ATH Profit Taking: Profit 4902.0% > 100% (Sell 25%)"
+    }
+  ]
+}

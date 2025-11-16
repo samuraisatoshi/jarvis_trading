@@ -1,0 +1,21 @@
+{
+  "symbol": "BNB_USDT",
+  "strategy": "KISS Supreme",
+  "initial_balance": 5000.0,
+  "final_balance": 4902.366644019628,
+  "total_return_usd": -97.63335598037156,
+  "total_return_pct": -1.9526671196074312,
+  "buy_hold_return_pct": 21.61544356650193,
+  "buy_hold_balance": 6080.772178325096,
+  "alpha": -23.56811068610936,
+  "total_trades": 2,
+  "winning_trades": 1,
+  "losing_trades": 1,
+  "win_rate_pct": 50.0,
+  "avg_win_pct": 1.2420390581644216,
+  "avg_loss_pct": -3.155513468013469,
+  "sharpe_ratio": -6.907356851444055,
+  "max_drawdown_pct": -3.1555134680134747,
+  "best_trade_pct": 1.2420390581644216,
+  "worst_trade_pct": -3.155513468013469
+}
