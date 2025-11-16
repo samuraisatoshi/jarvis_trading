@@ -1,0 +1,150 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+
+Copyright (c) 2024-2025 samuraisatoshi
+
+=======================================================================
+
+JARVIS Trading System - Open Source Non-Commercial License
+
+=======================================================================
+
+This work is licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You are free to:
+
+  * Share — copy and redistribute the material in any medium or format
+  * Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+
+  * Attribution — You must give appropriate credit, provide a link to
+    the license, and indicate if changes were made. You may do so in
+    any reasonable manner, but not in any way that suggests the
+    licensor endorses you or your use.
+
+  * NonCommercial — You may not use the material for commercial purposes.
+    This includes:
+    - Selling the software or any derivative works
+    - Using the software in a commercial trading operation
+    - Offering the software as a paid service (SaaS)
+    - Including the software in commercial products
+    - Using the software to generate revenue directly or indirectly
+
+  * ShareAlike — If you remix, transform, or build upon the material,
+    you must distribute your contributions under the same license as
+    the original.
+
+  * No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing
+    anything the license permits.
+
+Notices:
+
+  * You do not have to comply with the license for elements of the
+    material in the public domain or where your use is permitted by
+    an applicable exception or limitation.
+
+  * No warranties are given. The license may not give you all of the
+    permissions necessary for your intended use. For example, other
+    rights such as publicity, privacy, or moral rights may limit how
+    you use the material.
+
+=======================================================================
+
+ADDITIONAL TERMS AND CONDITIONS
+
+=======================================================================
+
+1. DISCLAIMER OF WARRANTY
+
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+2. LIMITATION OF LIABILITY
+
+   THE AUTHOR SHALL NOT BE LIABLE FOR ANY TRADING LOSSES, DAMAGES, OR
+   OTHER FINANCIAL LOSSES ARISING FROM THE USE OF THIS SOFTWARE. USERS
+   ASSUME ALL RISKS ASSOCIATED WITH TRADING AND INVESTMENT DECISIONS.
+
+3. ACCEPTABLE USE
+
+   This software is intended for:
+   - Educational purposes
+   - Personal research and learning
+   - Non-commercial academic research
+   - Contributing improvements back to the community
+
+4. PROHIBITED USE
+
+   You may NOT:
+   - Use this software for commercial trading operations
+   - Sell access to this software or its derivatives
+   - Include this software in commercial products or services
+   - Use this software to manage third-party funds
+   - Offer this software as a paid service or subscription
+   - Create commercial derivatives or forks
+
+5. ATTRIBUTION REQUIREMENTS
+
+   Any public use or distribution must include:
+   - Clear attribution to "JARVIS Trading by samuraisatoshi"
+   - Link to the original repository: https://github.com/samuraisatoshi/jarvis_trading
+   - Notice of any changes made to the original code
+   - This license file in its entirety
+
+6. CONTRIBUTIONS
+
+   By contributing to this project, you agree that your contributions
+   will be licensed under this same license. You retain copyright to
+   your contributions but grant a perpetual, worldwide, non-exclusive,
+   royalty-free license to use, reproduce, and distribute your
+   contributions as part of this project.
+
+7. TRADEMARK
+
+   The name "JARVIS Trading" and associated logos are trademarks of
+   the original author. You may not use these trademarks without
+   explicit written permission, except as required for attribution.
+
+8. GOVERNING LAW
+
+   This license shall be governed by and construed in accordance with
+   the laws of the jurisdiction in which the copyright holder resides,
+   without regard to its conflict of law provisions.
+
+9. SEVERABILITY
+
+   If any provision of this license is held to be unenforceable, such
+   provision shall be reformed only to the extent necessary to make it
+   enforceable, and the remaining provisions shall continue in full
+   force and effect.
+
+10. TERMINATION
+
+    This license automatically terminates if you fail to comply with
+    its terms and conditions. Upon termination, you must cease all use
+    and distribution of the software and destroy all copies.
+
+=======================================================================
+
+For more information about this license, please visit:
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+To view a copy of this license, visit:
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+For permissions beyond the scope of this license, please contact:
+- GitHub: @samuraisatoshi
+- Repository: https://github.com/samuraisatoshi/jarvis_trading
+
+=======================================================================
+
+END OF LICENSE
+
+=======================================================================
