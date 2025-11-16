@@ -4,24 +4,23 @@ Fibonacci Golden Zone backtest strategy implementation.
 This module integrates the Fibonacci Golden Zone strategy with the backtest engine.
 It wraps the strategy logic and provides the interface required by BacktestEngine.
 
+REFACTORING NOTE:
+- Old: Imported from scripts/fibonacci_golden_zone_strategy.py
+- New: Imports from src/strategies/fibonacci_golden_zone.py
+- Benefits: Clean imports, no sys.path hacks, proper package structure
+
 SOLID Principles:
 - Single Responsibility: Only handles Fibonacci strategy integration
 - Dependency Inversion: Depends on TradingStrategy abstraction
 - Open/Closed: Can be extended with variants
 """
 
-import sys
-from pathlib import Path
 from typing import Dict
 import pandas as pd
 
-# Add project root to path for imports
-project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
-sys.path.insert(0, str(project_root / 'scripts'))
-
 from src.backtesting.engine import TradingStrategy, BacktestEngine
 from src.infrastructure.exchange.binance_rest_client import BinanceRESTClient
+from src.strategies import FibonacciGoldenZoneStrategy
 
 
 class FibonacciBacktestStrategy(TradingStrategy):
@@ -40,15 +39,7 @@ class FibonacciBacktestStrategy(TradingStrategy):
 
     def __init__(self):
         """Initialize Fibonacci strategy."""
-        # Lazy import to avoid circular dependencies
-        try:
-            from fibonacci_golden_zone_strategy import FibonacciGoldenZoneStrategy
-            self.strategy = FibonacciGoldenZoneStrategy()
-        except ImportError as e:
-            raise ImportError(
-                f"Failed to import FibonacciGoldenZoneStrategy: {e}\n"
-                "Ensure fibonacci_golden_zone_strategy.py is in scripts/ directory"
-            )
+        self.strategy = FibonacciGoldenZoneStrategy()
 
     def generate_signal(self, df: pd.DataFrame) -> Dict:
         """

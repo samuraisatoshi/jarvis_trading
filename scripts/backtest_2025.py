@@ -24,16 +24,17 @@ import sys
 import json
 import logging
 import pandas as pd
-import numpy as np
+import traceback
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional
-from dataclasses import dataclass, asdict
-import traceback
+from dataclasses import asdict
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+# Import from src/backtesting framework
+from src.backtesting import Trade, MetricsCalculator
 from src.domain.reinforcement_learning.services.model_loader import ModelLoader
 from src.domain.reinforcement_learning.services.prediction_service import RLPredictionService
 from src.domain.features.services.feature_calculator import FeatureCalculator
@@ -46,68 +47,18 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class Trade:
-    """Single trade record."""
-    entry_time: str
-    entry_price: float
-    exit_time: Optional[str]
-    exit_price: Optional[float]
-    quantity: float
-    entry_confidence: float
-    side: str  # 'LONG' or 'SHORT'
-    pnl: Optional[float] = None
-    pnl_pct: Optional[float] = None
-    duration_hours: Optional[float] = None
+class RLBacktestEngine:
+    """
+    Reinforcement Learning backtest engine.
 
-    def close(self, exit_time: str, exit_price: float, exit_confidence: float):
-        """Close the trade."""
-        self.exit_time = exit_time
-        self.exit_price = exit_price
-
-        if self.side == 'LONG':
-            self.pnl = (exit_price - self.entry_price) * self.quantity
-            self.pnl_pct = ((exit_price - self.entry_price) / self.entry_price) * 100
-        else:
-            self.pnl = (self.entry_price - exit_price) * self.quantity
-            self.pnl_pct = ((self.entry_price - exit_price) / self.entry_price) * 100
-
-        # Duration
-        entry_dt = pd.to_datetime(self.entry_time)
-        exit_dt = pd.to_datetime(exit_time)
-        self.duration_hours = (exit_dt - entry_dt).total_seconds() / 3600
-
-
-@dataclass
-class BacktestMetrics:
-    """Backtest performance metrics."""
-    symbol: str
-    timeframe: str
-    initial_balance: float
-    final_balance: float
-    total_return_pct: float
-    total_return_usd: float
-    sharpe_ratio: float
-    max_drawdown_pct: float
-    max_drawdown_usd: float
-    win_rate_pct: float
-    total_trades: int
-    winning_trades: int
-    losing_trades: int
-    average_win_pct: float
-    average_loss_pct: float
-    profit_factor: float
-    best_trade_pct: float
-    worst_trade_pct: float
-    avg_candles_per_trade: float
-
-
-class BacktestEngine2025:
-    """Backtest FinRL models on 2025 data."""
+    This engine is specialized for RL models that predict actions (BUY/HOLD/SELL)
+    with confidence scores. It reuses the core Trade model and MetricsCalculator
+    from the backtesting framework.
+    """
 
     def __init__(self, initial_balance: float = 5000.0):
         """
-        Initialize backtest engine.
+        Initialize RL backtest engine.
 
         Args:
             initial_balance: Starting capital in USDT
@@ -122,9 +73,9 @@ class BacktestEngine2025:
         timeframe: str,
         model_loader: ModelLoader,
         min_confidence: float = 0.0
-    ) -> Tuple[BacktestMetrics, List[Trade]]:
+    ) -> Tuple[Optional[object], List[Trade]]:
         """
-        Run backtest for single symbol/timeframe.
+        Run backtest for single symbol/timeframe using RL model.
 
         Args:
             df: OHLCV DataFrame
@@ -139,8 +90,7 @@ class BacktestEngine2025:
         logger.info(f"\nBacktesting {symbol} {timeframe}...")
 
         try:
-            # Load model
-            model_symbol = symbol.replace('_', '').replace('USDT', '').upper()
+            # Load model and prediction service
             rl_service = RLPredictionService(model_loader)
 
             # Calculate features
@@ -156,7 +106,7 @@ class BacktestEngine2025:
             balance = self.initial_balance
             position = None  # None or Trade object
             trades = []
-            equity_curve = [balance]
+            portfolio_values = []
             timestamps = []
 
             # Process candles
@@ -165,163 +115,113 @@ class BacktestEngine2025:
             for i in range(100, len(df_features)):
                 current_time = df_features.index[i]
                 current_price = df_features.iloc[i]['close']
-                current_row = df_features.iloc[i:i+1]
 
-                # Get prediction from model
+                # Get prediction from RL model
                 try:
-                    prediction = rl_service.predict(symbol, timeframe, df_features.iloc[max(0, i-100):i+1])
+                    prediction = rl_service.predict(
+                        symbol,
+                        timeframe,
+                        df_features.iloc[max(0, i - 100):i + 1]
+                    )
 
                     if prediction is None or prediction.confidence < min_confidence:
-                        continue
+                        # No prediction or low confidence - HOLD
+                        pass
+                    else:
+                        action = prediction.action  # 0=SELL, 1=HOLD, 2=BUY
+                        confidence = prediction.confidence
 
-                    action = prediction.action  # 0=SELL, 1=HOLD, 2=BUY
-                    confidence = prediction.confidence
+                        # Handle trading logic
+                        if action == 2 and position is None:  # BUY signal
+                            # Calculate position size (1% of balance per trade)
+                            position_size = balance * 0.01 * confidence
+                            if position_size > 0:
+                                quantity = position_size / current_price
+                                position = Trade(
+                                    entry_time=str(current_time),
+                                    entry_price=current_price,
+                                    quantity=quantity,
+                                    side='LONG',
+                                    confirmations=[f'RL_confidence_{confidence:.0%}']
+                                )
+                                balance -= position_size
+                                logger.debug(
+                                    f"  BUY {symbol}: {quantity:.4f} @ {current_price:.2f} "
+                                    f"(conf: {confidence:.0%})"
+                                )
+
+                        elif action == 0 and position is not None:  # SELL signal
+                            # Close position
+                            proceeds = position.quantity * current_price
+                            position.close(str(current_time), current_price, 'signal')
+                            balance += proceeds
+                            trades.append(position)
+                            logger.debug(
+                                f"  SELL {symbol}: PnL {position.pnl:.2f} "
+                                f"({position.pnl_pct:.1f}%)"
+                            )
+                            position = None
 
                 except Exception as e:
                     logger.debug(f"  Prediction error at {current_time}: {e}")
-                    continue
 
-                # Handle trading logic
-                if action == 2 and position is None:  # BUY signal
-                    # Calculate position size (1% of balance per trade)
-                    position_size = balance * 0.01 * confidence
-                    if position_size > 0:
-                        quantity = position_size / current_price
-                        position = Trade(
-                            entry_time=str(current_time),
-                            entry_price=current_price,
-                            exit_time=None,
-                            exit_price=None,
-                            quantity=quantity,
-                            entry_confidence=confidence,
-                            side='LONG'
-                        )
-                        balance -= position_size
-                        logger.debug(f"  BUY {symbol}: {quantity:.4f} @ {current_price:.2f} (conf: {confidence:.0%})")
-
-                elif action == 0 and position is not None:  # SELL signal
-                    # Close position
-                    proceeds = position.quantity * current_price
-                    position.close(str(current_time), current_price, confidence)
-                    balance += proceeds + position.pnl
-                    trades.append(position)
-                    logger.debug(f"  SELL {symbol}: PnL {position.pnl:.2f} ({position.pnl_pct:.1f}%)")
-                    position = None
-
-                # Update equity curve
-                equity = balance
+                # Update portfolio tracking
+                portfolio_value = balance
                 if position is not None:
-                    equity += position.quantity * current_price
-                equity_curve.append(equity)
+                    portfolio_value += position.quantity * current_price
+                portfolio_values.append(portfolio_value)
                 timestamps.append(current_time)
 
             # Close any open position at end
             if position is not None:
                 last_price = df_features.iloc[-1]['close']
-                position.close(str(df_features.index[-1]), last_price, 0.5)
-                balance += position.quantity * last_price + position.pnl
+                position.close(str(df_features.index[-1]), last_price, 'end_of_period')
+                balance += position.quantity * last_price
                 trades.append(position)
-                equity_curve[-1] = balance
 
-            # Calculate metrics
-            metrics = self._calculate_metrics(
-                symbol=symbol,
-                timeframe=timeframe,
-                initial_balance=self.initial_balance,
-                final_balance=balance,
-                trades=trades,
-                equity_curve=equity_curve,
-                timestamps=timestamps,
-                df=df_features
-            )
+            # Create portfolio DataFrame for metrics calculation
+            portfolio_df = pd.DataFrame({
+                'timestamp': timestamps,
+                'portfolio_value': portfolio_values,
+                'price': df_features.iloc[100:]['close'].values
+            })
+            portfolio_df['timestamp'] = pd.to_datetime(portfolio_df['timestamp'])
+            portfolio_df.set_index('timestamp', inplace=True)
 
-            logger.info(
-                f"  Complete: {len(trades)} trades, "
-                f"Return: {metrics.total_return_pct:.1f}%, "
-                f"Sharpe: {metrics.sharpe_ratio:.2f}, "
-                f"Max DD: {metrics.max_drawdown_pct:.1f}%"
-            )
+            # Calculate metrics using framework's MetricsCalculator
+            if len(trades) > 0:
+                metrics = MetricsCalculator.calculate(
+                    trades=trades,
+                    portfolio_df=portfolio_df,
+                    initial_balance=self.initial_balance,
+                    symbol=symbol,
+                    timeframe=timeframe,
+                    strategy_name='FinRL RL Model'
+                )
 
-            return metrics, trades
+                logger.info(
+                    f"  Complete: {len(trades)} trades, "
+                    f"Return: {metrics.total_return_pct:.1f}%, "
+                    f"Sharpe: {metrics.sharpe_ratio:.2f}, "
+                    f"Max DD: {metrics.max_drawdown_pct:.1f}%"
+                )
+
+                return metrics, trades
+            else:
+                logger.warning(f"  No trades executed for {symbol} {timeframe}")
+                return None, []
 
         except Exception as e:
             logger.error(f"  Error backtesting {symbol} {timeframe}: {e}")
             logger.debug(traceback.format_exc())
             return None, []
 
-    def _calculate_metrics(
+    def load_data(
         self,
         symbol: str,
         timeframe: str,
-        initial_balance: float,
-        final_balance: float,
-        trades: List[Trade],
-        equity_curve: List[float],
-        timestamps: List,
-        df: pd.DataFrame
-    ) -> BacktestMetrics:
-        """Calculate performance metrics."""
-
-        # Returns
-        total_return_usd = final_balance - initial_balance
-        total_return_pct = (total_return_usd / initial_balance) * 100
-
-        # Sharpe Ratio
-        equity_series = pd.Series(equity_curve)
-        returns = equity_series.pct_change().dropna()
-        sharpe = (returns.mean() / returns.std() * np.sqrt(252)) if returns.std() > 0 else 0
-
-        # Drawdown
-        running_max = equity_series.expanding().max()
-        drawdown = (equity_series - running_max) / running_max * 100
-        max_drawdown_pct = drawdown.min()
-        max_drawdown_usd = initial_balance * (max_drawdown_pct / 100)
-
-        # Win rate
-        winning = [t for t in trades if t.pnl and t.pnl > 0]
-        losing = [t for t in trades if t.pnl and t.pnl <= 0]
-        win_rate = (len(winning) / len(trades) * 100) if trades else 0
-
-        # Average P&L
-        avg_win = np.mean([t.pnl_pct for t in winning]) if winning else 0
-        avg_loss = np.mean([t.pnl_pct for t in losing]) if losing else 0
-
-        # Profit factor
-        total_profit = sum(t.pnl for t in winning if t.pnl) if winning else 0
-        total_loss = abs(sum(t.pnl for t in losing if t.pnl)) if losing else 1
-        profit_factor = total_profit / total_loss if total_loss > 0 else 0
-
-        # Best/worst trades
-        all_pnl_pcts = [t.pnl_pct for t in trades if t.pnl_pct is not None]
-        best_trade = max(all_pnl_pcts) if all_pnl_pcts else 0
-        worst_trade = min(all_pnl_pcts) if all_pnl_pcts else 0
-
-        # Avg candles per trade
-        avg_candles = len(df) / len(trades) if trades else 0
-
-        return BacktestMetrics(
-            symbol=symbol,
-            timeframe=timeframe,
-            initial_balance=initial_balance,
-            final_balance=final_balance,
-            total_return_pct=total_return_pct,
-            total_return_usd=total_return_usd,
-            sharpe_ratio=sharpe,
-            max_drawdown_pct=max_drawdown_pct,
-            max_drawdown_usd=max_drawdown_usd,
-            win_rate_pct=win_rate,
-            total_trades=len(trades),
-            winning_trades=len(winning),
-            losing_trades=len(losing),
-            average_win_pct=avg_win,
-            average_loss_pct=avg_loss,
-            profit_factor=profit_factor,
-            best_trade_pct=best_trade,
-            worst_trade_pct=worst_trade,
-            avg_candles_per_trade=avg_candles
-        )
-
-    def load_data(self, symbol: str, timeframe: str, data_dir: str = 'data/2025') -> Optional[pd.DataFrame]:
+        data_dir: str = 'data/2025'
+    ) -> Optional[pd.DataFrame]:
         """Load preprocessed CSV data."""
         safe_symbol = symbol.replace('_', '_').upper()
         filepath = Path(data_dir) / f"{safe_symbol}_{timeframe}_2025.csv"
@@ -341,7 +241,7 @@ class BacktestEngine2025:
     def save_results(
         self,
         results_dir: str,
-        all_metrics: Dict[str, BacktestMetrics],
+        all_metrics: Dict[str, object],
         all_trades: Dict[str, List[Trade]]
     ):
         """Save backtest results to files."""
@@ -374,18 +274,18 @@ class BacktestEngine2025:
         summary_file = output_dir / 'BACKTEST_REPORT.txt'
         self._write_summary_report(summary_file, all_metrics)
 
-    def _write_summary_report(self, filepath: Path, all_metrics: Dict[str, BacktestMetrics]):
+    def _write_summary_report(self, filepath: Path, all_metrics: Dict[str, object]):
         """Write human-readable summary report."""
         with open(filepath, 'w') as f:
             f.write("=" * 80 + "\n")
-            f.write("2025 BACKTEST REPORT\n")
+            f.write("2025 BACKTEST REPORT - FinRL RL Models\n")
             f.write("=" * 80 + "\n\n")
 
             f.write(f"Report generated: {datetime.now().isoformat()}\n")
-            f.write(f"Period: 2025-01-01 to 2025-11-14\n")
-            f.write(f"Initial balance: $5,000 USDT\n\n")
+            f.write("Period: 2025-01-01 to 2025-11-14\n")
+            f.write(f"Initial balance: ${self.initial_balance:,.2f} USDT\n\n")
 
-            # Group by metric
+            # Sort by return
             sorted_metrics = sorted(
                 [m for m in all_metrics.values() if m],
                 key=lambda x: x.total_return_pct,
@@ -438,7 +338,7 @@ def main():
     args = parser.parse_args()
 
     # Create engine
-    engine = BacktestEngine2025(initial_balance=args.initial_balance)
+    engine = RLBacktestEngine(initial_balance=args.initial_balance)
 
     # Resolve models directory
     models_path = Path(args.models_dir).resolve()
