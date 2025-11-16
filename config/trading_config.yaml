@@ -1,0 +1,229 @@
+# JARVIS Trading Configuration
+# Advanced risk management and position control settings
+
+# Trading Mode Configuration
+trading:
+  mode: paper  # paper or live
+  account_id: "868e0dd8-37f5-43ea-a956-7cc05e6bad66"
+  initial_balance: 10000.0
+  enabled: true
+
+# Position Management
+position_management:
+  # Maximum positions allowed simultaneously
+  max_concurrent_positions: 3
+
+  # Position size limits (as % of portfolio)
+  position_sizes:
+    1h: 0.05   # 5% per position on 1h timeframe
+    4h: 0.10   # 10% per position on 4h timeframe
+    1d: 0.15   # 15% per position on 1d timeframe
+
+  # Maximum exposure per asset (% of total portfolio)
+  max_asset_exposure: 0.2   # Max 25% in any single asset
+
+  # Minimum position size in USD
+  min_trade_value: 10.0
+
+  # DCA (Dollar Cost Averaging) settings
+  dca:
+    enabled: true
+    max_dca_rounds: 3  # Maximum times to average down
+    dca_multiplier: 1.5  # Multiply position size by this on each DCA
+
+# Order Cool Down Settings (Prevent excessive orders in sideways markets)
+order_cooldown:
+  enabled: true
+
+  # Minimum price gap between orders (%)
+  min_price_gap_percent: 3.0  # Require 2% price difference
+
+  # Time-based cool down (seconds)
+  cooldown_periods:
+    1h: 3600    # 1 hour cool down for 1h timeframe
+    4h: 14400   # 4 hours cool down for 4h timeframe
+    1d: 86400   # 24 hours cool down for 1d timeframe
+
+  # Cool down after stop loss hit (seconds)
+  stop_loss_cooldown: 86400  # 24 hours after stop loss
+
+  # Maximum orders per symbol per day
+  max_daily_orders_per_symbol: 3
+
+# Cash Reserve Management
+cash_management:
+  # Minimum cash reserve (% of portfolio)
+  min_cash_reserve: 0.3   # Keep 20% in cash always
+
+  # Cash reserve by timeframe (% to keep available)
+  timeframe_reserves:
+    1h: 0.30   # Keep 30% cash for 1h trades
+    4h: 0.25   # Keep 25% cash for 4h trades
+    1d: 0.20   # Keep 20% cash for 1d trades
+
+  # Progressive cash reservation (based on drawdown)
+  progressive_reserve:
+    enabled: true
+    # If drawdown > X%, increase cash reserve
+    drawdown_thresholds:
+    - threshold: 5.0
+      reserve_increase: 0.05    # Add 5% to reserve
+    - threshold: 10.0
+      reserve_increase: 0.10    # Add 10% to reserve
+    - threshold: 15.0
+      reserve_increase: 0.20    # Add 20% to reserve
+
+# Risk Management
+risk_management:
+  # Maximum drawdown allowed (%)
+  max_drawdown_percent: 10.0
+
+  # Daily loss limit (%)
+  daily_loss_limit_percent: 3.0
+
+  # Stop loss and take profit defaults (%)
+  default_stop_loss_percent: 3.0
+  default_take_profit_percent: 6.0
+
+  # Risk per trade (% of portfolio)
+  risk_per_trade: 1.0
+
+  # Trailing stop loss
+  trailing_stop:
+    enabled: true
+    activation_profit_percent: 2.0  # Activate after 2% profit
+    trail_distance_percent: 1.0     # Trail by 1%
+
+# Market Condition Filters
+market_filters:
+  # Volatility filter
+  volatility_filter:
+    enabled: true
+    min_volatility: 0.5  # Minimum volatility to trade
+    max_volatility: 5.0  # Maximum volatility to trade
+
+  # Volume filter
+  volume_filter:
+    enabled: true
+    min_volume_usd: 1000000  # Minimum 24h volume in USD
+
+  # Trend filter
+  trend_filter:
+    enabled: true
+    require_trend_alignment: true  # All timeframes must agree
+
+# Position Tracking
+position_tracking:
+  # Track last order prices to prevent duplicate orders
+  track_last_prices: true
+
+  # History retention (days)
+  order_history_days: 30
+
+  # Database path for order history
+  history_db: "data/order_history.db"
+
+# Performance Monitoring
+performance:
+  # Minimum Sharpe ratio to continue trading
+  min_sharpe_ratio: 0.5
+
+  # Performance evaluation window (number of trades)
+  evaluation_window: 20
+
+  # Auto-pause if performance drops
+  auto_pause_on_poor_performance: true
+
+# Notification Settings
+notifications:
+  telegram:
+    enabled: true
+    send_trade_alerts: true
+    send_daily_summary: true
+    send_risk_warnings: true
+
+  # Alert thresholds
+  alerts:
+    drawdown_warning: 10.0     # Warn at 10% drawdown
+    cash_low_warning: 0.15     # Warn when cash < 15%
+    exposure_warning: 0.80     # Warn at 80% exposure
+
+# Strategy Specific Settings
+strategies:
+  fibonacci:
+    enabled: true
+    golden_zone_start: 0.50
+    golden_zone_end: 0.618
+    stop_level: 0.786
+    targets: [1.618, 2.618]
+
+  elliott_wave:
+    enabled: true
+    min_wave_confidence: 0.7
+
+  reinforcement_learning:
+    enabled: false  # Disabled by default
+    model_path: "../models/mtf"
+
+# Daemon Configuration
+daemon:
+  check_interval: 3600  # Check every hour
+
+  # Minimum intervals between checks per timeframe
+  min_check_intervals:
+    1h: 300    # 5 minutes
+    4h: 1200   # 20 minutes
+    1d: 3600   # 1 hour
+
+  # Status report interval (hours)
+  status_report_interval: 6
+
+# Exchange Settings
+exchange:
+  name: binance
+  testnet: false
+
+  # Rate limiting
+  rate_limits:
+    orders_per_second: 10
+    requests_per_minute: 1200
+
+# Logging Configuration
+logging:
+  level: INFO
+  file: logs/trading.log
+  max_size_mb: 100
+  backup_count: 5
+
+  # Detailed logging for debugging
+  detailed:
+    log_all_signals: false
+    log_order_validation: true
+    log_risk_calculations: true
+
+# Backtesting Settings
+backtesting:
+  enabled: false
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  initial_capital: 10000
+  commission: 0.001  # 0.1% commission
+
+# Advanced Features
+advanced:
+  # Smart order routing
+  smart_routing:
+    enabled: true
+    split_large_orders: true
+    max_order_split: 5
+
+  # Correlation analysis
+  correlation:
+    enabled: true
+    max_correlation: 0.7  # Don't trade highly correlated assets
+
+  # Machine learning optimization
+  ml_optimization:
+    enabled: false
+    optimize_parameters: false
+    optimization_interval_days: 7
