@@ -190,18 +190,10 @@ class TradeExecutor:
                 f"(Order: {order_id})"
             )
 
-            # Send notification (non-blocking)
-            try:
-                self.notification_service.notify_trade_executed(
-                    trade_type='BUY',
-                    symbol=signal.symbol,
-                    quantity=quantity,
-                    price=signal.price,
-                    timeframe=signal.timeframe,
-                    reason=signal.reason
-                )
-            except Exception as e:
-                logger.error(f"Failed to send notification: {e}")
+            # REMOVED: Duplicate notification - moved to daemon_manager
+            # Notification is now handled by daemon_manager.py to avoid duplication
+            # The daemon_manager calls notification_handler.notify_trade_executed(result)
+            # after trade execution, so we don't need to send it here anymore
 
             return TradeResult(
                 success=True,
@@ -305,18 +297,10 @@ class TradeExecutor:
                 f"(Order: {order_id})"
             )
 
-            # Send notification (non-blocking)
-            try:
-                self.notification_service.notify_trade_executed(
-                    trade_type='SELL',
-                    symbol=signal.symbol,
-                    quantity=quantity,
-                    price=signal.price,
-                    timeframe=signal.timeframe,
-                    reason=signal.reason
-                )
-            except Exception as e:
-                logger.error(f"Failed to send notification: {e}")
+            # REMOVED: Duplicate notification - moved to daemon_manager
+            # Notification is now handled by daemon_manager.py to avoid duplication
+            # The daemon_manager calls notification_handler.notify_trade_executed(result)
+            # after trade execution, so we don't need to send it here anymore
 
             return TradeResult(
                 success=True,
