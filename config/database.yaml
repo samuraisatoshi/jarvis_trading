@@ -1,0 +1,67 @@
+# SQLite Database Configuration
+database:
+  # Path to database file (relative to project root)
+  path: "data/jarvis_trading.db"
+
+  # Backup configuration
+  backup:
+    enabled: true
+    path: "data/backups/"
+    daily_backup: true
+    retention_days: 30
+
+  # Performance settings
+  performance:
+    # WAL mode: better concurrency for reads/writes
+    wal_mode: true
+
+    # Journal mode: WAL (write-ahead logging)
+    journal_mode: "WAL"
+
+    # Synchronous: NORMAL = good balance of safety/performance
+    synchronous: "NORMAL"
+
+    # Cache size: 2MB
+    cache_size: -2000
+
+    # Foreign key constraints: ON
+    foreign_keys: true
+
+    # Auto vacuum: INCREMENTAL
+    auto_vacuum: "INCREMENTAL"
+
+    # Busy timeout (ms): 5 seconds
+    busy_timeout: 5000
+
+    # Connection pool
+    max_connections: 5
+
+  # Cleanup settings
+  cleanup:
+    # Run cleanup daily
+    enabled: true
+
+    # Keep records for 90 days
+    keep_days: 90
+
+    # Auto-delete old records
+    auto_delete_old_records: false
+
+  # Schema
+  schema:
+    # Auto-initialize on startup
+    auto_initialize: true
+
+    # Verify schema on startup
+    verify_on_startup: true
+
+  # Logging
+  logging:
+    # Log database operations
+    enabled: true
+
+    # Log level: DEBUG, INFO, WARNING, ERROR
+    level: "INFO"
+
+    # Log slow queries (ms)
+    slow_query_threshold: 1000

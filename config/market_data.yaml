@@ -1,0 +1,86 @@
+# Market Data Configuration
+# REST API (not WebSocket) for fetching candlestick data with scheduled jobs
+
+market_data:
+  # API type: REST provides reliable candle-close timing
+  api: REST
+
+  # Binance API endpoints
+  endpoints:
+    production: "https://api.binance.com/api/v3"
+    testnet: "https://testnet.binance.vision/api/v3"
+
+  # Trading pairs to monitor
+  symbols:
+    - BTCUSDT  # Bitcoin
+    - ETHUSDT  # Ethereum
+    - BNBUSDT  # Binance Coin
+    - XRPUSDT  # Ripple
+    - ADAUSDT  # Cardano
+    - DOGEUSDT # Dogecoin
+    - LINKUSDT # Chainlink
+    - LTCUSDT  # Litecoin
+
+  # Timeframes with candle close schedules (UTC)
+  timeframes:
+    # Active timeframes for continuous monitoring
+    active:
+      - 5m   # Every 5 minutes at :00, :05, :10, :15, :20, :25, :30, :35, :40, :45, :50, :55
+      - 15m  # Every 15 minutes at :00, :15, :30, :45
+      - 1h   # Every hour at :00
+      - 4h   # Every 4 hours at 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC
+      - 1d   # Daily at 00:00 UTC
+
+    # Additional timeframes (on demand)
+    available:
+      - 1m   # Every minute at :00 seconds
+      - 30m  # Every 30 minutes at :00, :30
+      - 1w   # Weekly Monday at 00:00 UTC
+
+  # Rate limiting (Binance allows 1200 weight per minute)
+  rate_limits:
+    weight_per_minute: 1200
+    requests_per_second: 10
+    # Cost of common operations
+    operation_costs:
+      klines: 1        # weight per request
+      ticker_price: 1
+      ticker_24h: 1
+      exchange_info: 10
+
+  # Fetch parameters
+  fetch:
+    # Number of candles to fetch per request (max 1000)
+    default_limit: 100
+    # Timeout for API requests (seconds)
+    request_timeout: 10
+    # Retry policy
+    retry_attempts: 3
+    retry_delay: 1  # seconds
+
+# Candle Close Times Documentation
+# These are the official times when candles close on Binance (all UTC)
+#
+# 1m:  Every minute at :00 seconds
+#      Examples: 14:00:00, 14:01:00, 14:02:00
+#
+# 5m:  At minutes :00, :05, :10, :15, :20, :25, :30, :35, :40, :45, :50, :55
+#      Examples: 14:00:00, 14:05:00, 14:10:00
+#
+# 15m: At minutes :00, :15, :30, :45
+#      Examples: 14:00:00, 14:15:00, 14:30:00, 14:45:00
+#
+# 30m: At minutes :00, :30
+#      Examples: 14:00:00, 14:30:00
+#
+# 1h:  At minute :00 of each hour
+#      Examples: 14:00:00, 15:00:00, 16:00:00
+#
+# 4h:  At 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC
+#      Examples: 00:00:00, 04:00:00, 08:00:00, 12:00:00
+#
+# 1d:  At 00:00:00 UTC (midnight)
+#      Examples: 2024-11-14 00:00:00, 2024-11-15 00:00:00
+#
+# 1w:  Monday at 00:00:00 UTC
+#      Examples: 2024-11-11 00:00:00, 2024-11-18 00:00:00

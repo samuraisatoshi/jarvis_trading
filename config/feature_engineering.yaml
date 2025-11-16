@@ -1,0 +1,59 @@
+# Feature Engineering Configuration
+
+indicators:
+  momentum:
+    rsi:
+      periods: [14, 21, 28]
+    macd:
+      fast: 12
+      slow: 26
+      signal: 9
+    stochastic:
+      k_period: 14
+      d_period: 3
+    roc:
+      periods: [12, 25]
+
+  trend:
+    moving_averages:
+      simple: [20, 50, 200]
+      exponential: [12, 26]
+    adx:
+      period: 14
+    atr:
+      period: 14
+
+  volatility:
+    bollinger_bands:
+      period: 20
+      std_dev: 2
+    keltner_channel:
+      period: 20
+      atr_mult: 2
+
+  volume:
+    obv: true
+    adl: true
+    cmf:
+      period: 20
+    mfi:
+      period: 14
+
+  support_resistance:
+    enabled: true
+    lookback_periods: 100
+
+normalization:
+  method: minmax  # or zscore
+  window: 252  # 1-year window
+
+feature_selection:
+  correlation_threshold: 0.95
+  variance_threshold: 0.01
+  importance_threshold: 0.01
+  max_features: 50
+
+scaling:
+  enabled: true
+  method: standardscaler
+  save_scaler: true

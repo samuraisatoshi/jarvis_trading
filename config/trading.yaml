@@ -1,0 +1,33 @@
+# Jarvis Trading Configuration
+
+trading:
+  pair: BTCUSDT
+  interval: 1h
+  lookback_periods: 500
+  position_size: 1.0  # Percentage of balance
+
+data_pipeline:
+  timeframes:
+    - 1m
+    - 5m
+    - 15m
+    - 1h
+    - 4h
+    - 1d
+  cache_enabled: true
+  cache_expiry_hours: 24
+  batch_size: 100
+  retry_attempts: 3
+  retry_delay_seconds: 5
+
+environment:
+  initial_balance: 10000
+  transaction_cost: 0.001  # 0.1%
+  slippage: 0.0005  # 0.05%
+  max_positions: 5
+
+risk_management:
+  max_drawdown: 0.20  # 20%
+  stop_loss: 0.05  # 5%
+  take_profit: 0.10  # 10%
+  risk_per_trade: 0.02  # 2%

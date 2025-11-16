@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# Project
+*.db
+*.sqlite
+data/*.db
+logs/
+*.log
+temp/
+*.png
+
+# Secrets
+.env
+*.key
+credentials.json

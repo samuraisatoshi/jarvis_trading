@@ -1,0 +1,214 @@
+# Telegram Message Templates Configuration
+# Used by TradingMessageTemplates class for formatting notifications
+
+# System Events
+system_startup:
+  title: "🚀 SISTEMA INICIADO"
+  emoji: "🚀"
+  priority: high
+  fields:
+    - symbol
+    - timeframe
+    - account_id
+    - initial_balance
+
+system_shutdown:
+  title: "🛑 SISTEMA PARADO"
+  emoji: "🛑"
+  priority: high
+  fields:
+    - reason
+    - final_balance
+    - total_profit_loss
+
+system_error:
+  title: "⚠️ ERRO DETECTADO"
+  emoji: "⚠️"
+  priority: critical
+  fields:
+    - error_type
+    - error_message
+    - context
+    - timestamp
+
+# Market Analysis
+market_analysis:
+  title: "📊 ANÁLISE DE MERCADO"
+  emoji: "📊"
+  priority: medium
+  fields:
+    - symbol
+    - price
+    - rsi
+    - macd
+    - macd_signal
+    - bb_position
+    - volume_change
+  thresholds:
+    rsi_oversold: 30
+    rsi_overbought: 70
+    volume_threshold: 15
+
+# Trading Signals
+trade_signal:
+  title: "🎯 SINAL DE TRADING"
+  emoji: "🎯"
+  priority: high
+  fields:
+    - symbol
+    - action
+    - confidence
+    - price
+    - indicators
+    - reasoning
+  action_emojis:
+    BUY: "💚"
+    SELL: "❌"
+    HOLD: "⏸️"
+
+# Trade Execution
+trade_executed:
+  title: "✅ TRADE EXECUTADO"
+  emoji: "✅"
+  priority: high
+  fields:
+    - trade_type
+    - symbol
+    - quantity
+    - price
+    - total_cost
+    - new_balance_usdt
+    - new_balance_asset
+    - total_value
+
+# Alerts
+circuit_breaker:
+  title: "🚨 CIRCUIT BREAKER ATIVADO"
+  emoji: "🚨"
+  priority: critical
+  fields:
+    - reason
+    - current_drawdown
+    - max_drawdown
+    - action_required
+  thresholds:
+    max_drawdown: 0.15  # 15%
+    min_win_rate: 0.35  # 35%
+
+risk_alert:
+  title: "⚠️ ALERTA DE RISCO"
+  emoji: "⚠️"
+  priority: high
+  fields:
+    - alert_type
+    - current_value
+    - threshold
+    - recommendation
+
+# Reports
+daily_report:
+  title: "📊 RELATÓRIO DIÁRIO"
+  emoji: "📊"
+  priority: medium
+  fields:
+    - date
+    - trades_count
+    - wins
+    - losses
+    - win_rate
+    - profit_loss
+    - profit_loss_pct
+    - total_value
+  schedule: "00:00"  # UTC
+
+weekly_report:
+  title: "📈 RELATÓRIO SEMANAL"
+  emoji: "📈"
+  priority: medium
+  fields:
+    - week_start
+    - week_end
+    - trades_count
+    - wins
+    - losses
+    - win_rate
+    - profit_loss
+    - profit_loss_pct
+    - best_trade
+    - worst_trade
+    - total_value
+  schedule: "Monday 00:00"  # UTC
+
+# Performance Metrics
+performance_update:
+  title: "💹 ATUALIZAÇÃO DE PERFORMANCE"
+  emoji: "💹"
+  priority: low
+  fields:
+    - period
+    - roi
+    - sharpe_ratio
+    - max_drawdown
+    - win_rate
+    - profit_factor
+
+# Health Check
+health_check:
+  title: "🏥 HEALTH CHECK"
+  emoji: "🏥"
+  priority: low
+  fields:
+    - api_status
+    - database_status
+    - model_status
+    - last_execution
+    - next_execution
+    - uptime
+
+# Anomaly Detection
+anomaly_detected:
+  title: "🔍 ANOMALIA DETECTADA"
+  emoji: "🔍"
+  priority: high
+  fields:
+    - anomaly_type
+    - description
+    - severity
+    - recommendation
+  types:
+    - volume_spike
+    - price_gap
+    - volatility_surge
+    - correlation_break
+
+# Formatting Options
+formatting:
+  parse_mode: "HTML"  # HTML, Markdown, MarkdownV2
+  disable_web_page_preview: true
+  disable_notification: false  # Default for all messages
+
+# Rate Limiting
+rate_limiting:
+  max_messages_per_minute: 30
+  retry_attempts: 3
+  retry_delay_seconds: 2
+
+# Notification Preferences
+notifications:
+  startup: true
+  shutdown: true
+  market_analysis: true
+  trade_signals: true
+  trade_executions: true
+  circuit_breaker: true
+  daily_reports: true
+  weekly_reports: true
+  errors: true
+  warnings: true
+  health_checks: false  # Optional, on-demand only
+
+# Security
+security:
+  require_authorization: true
+  whitelist_enabled: true
+  # Add chat_ids to .env: TELEGRAM_AUTHORIZED_CHAT_IDS=id1,id2,id3
